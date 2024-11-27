@@ -37,6 +37,7 @@ public class DAS {
             throw exception;
         }
 
+
         try { // Run entity.
             entity.util();
         } catch (Exception exception) {
