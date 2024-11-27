@@ -2,7 +2,7 @@ package Logs;
 
 import Constants.SiteType;
 
-public class Log {
+public class Logger {
 
     public static SiteType prefix = SiteType.NONE;
 
