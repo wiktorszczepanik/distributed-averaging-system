@@ -1,4 +1,4 @@
-package Sites;
+package UDP;
 
 import java.net.DatagramSocket;
 import java.net.SocketException;
@@ -7,6 +7,7 @@ import Constants.SiteType;
 import Exceptions.FlagException;
 import Exceptions.PortException;
 import Logs.Logger;
+import sun.rmi.runtime.Log;
 
 public class Entity {
 
@@ -16,14 +17,7 @@ public class Entity {
 
     public Entity(String port, String number) throws NumberFormatException {
         this.port = Integer.parseInt(port);
-        this.number = Integer.parseInt(port);
-    }
-
-    public Entity(Entity entity) {
-        this.port = entity.getPort();
-        this.number = entity.getNumber();
-        this.socket = entity.getSocket();
-        this.mode = entity.getMode();
+        this.number = Integer.parseInt(number);
     }
 
     public SiteType getMode() { return mode; }
@@ -35,7 +29,7 @@ public class Entity {
         Logger.log("Check port number...");
         if (!(port >= 0 && port <= 65535))
             throw new PortException("Incorrect port number. Available are <0-65535>");
-        Logger.log("Correct port number.");
+        Logger.sendStatus("OK");
     }
 
     public void specifyMode() {
@@ -47,14 +41,15 @@ public class Entity {
             mode = SiteType.CLIENT;
         }
         Logger.setPrefix(mode);
-        Logger.log("Application mode specified!");
+        Logger.sendStatus("DONE");
     }
 
     public static void checkFlagLength(String[] programArguments) throws FlagException {
+        Logger.log("Check number of flags...");
         if (programArguments.length != 2)
             throw new FlagException(
                     "Incorrect nubmer of flags. The structure is: java DAS <port> <number>"
             );
-        Logger.log("Correct number of flags.");
+        Logger.sendStatus("OK");
     }
 }
