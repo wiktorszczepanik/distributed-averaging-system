@@ -1,5 +1,6 @@
 package Logs;
 
+import Constants.LogValue;
 import Constants.SiteType;
 
 public class Logger {
@@ -19,9 +20,13 @@ public class Logger {
         System.out.flush();
     }
 
-    public static void sendStatus(String status) {
+    public static void updateLastLine(int length) {
+        lastLineLength += length;
+    }
+
+    public static void sendStatus(LogValue status) {
         numberOfDots(lineLength - lastLineLength);
-        System.out.println("<" + status.toUpperCase() + ">");
+        System.out.println(status.getHeader());
         System.out.flush();
     }
 
