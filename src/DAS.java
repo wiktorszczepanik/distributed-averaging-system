@@ -19,13 +19,13 @@ public class DAS {
         Entity net;
         UDP entity = null;
 
-        try { // Check input values (port, number)
+        try { // BLOK 1 - Check input values (port, number)
             Entity.checkFlagLength(args);
             net = new Entity();
             net.setAndCheckPort(args[0]);
             net.setAndCheckNumber(args[1]);
 
-            // Select running mode
+            // BLOK 2 - Select running mode
             net.specifyMode();
             Logger.log("Load " + net.getMode()
                 .getTextVersion() + (" utilities..."));
@@ -36,7 +36,8 @@ public class DAS {
                     throw new ModeException("Possible options are client or server");
             }
             Logger.sendStatus(LogValue.DONE);
-            entity.util(); // Run entity (client or server)
+            // BLOK 3 - Run entity (client or server)
+            entity.util();
 
         } catch (FlagException | OnlyNumberException | PortException exception) {
             System.err.println(" Input values exception:\n" + exception.getMessage());

@@ -91,7 +91,7 @@ public class Server implements UDP {
     }
 
     private void sendBroadcastMessage(byte[] message) throws IOException {
-        Logger.log("Send broadcast message (10.10.10.255) ...");
+        Logger.log("Send broadcast message ...");
         InetAddress broadcastAddress = InetAddress.getByName("10.10.10.255");
         packet = new DatagramPacket(message, message.length, broadcastAddress, port);
         socket.send(packet);
